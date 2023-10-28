@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '.NameAnimation.module.scss';
+import styles from './NameAnimation.module.scss';
 
 const NameAnimation: React.FC = () => {
   return (
