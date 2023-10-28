@@ -32,5 +32,7 @@ jobs:
           git checkout main
           git add .
           git commit -m "Deploy to GitHub Pages (Prod)"
-          git push -f origin main:gh-pages
-
+          git push -f "https://$PAT_TOKEN@github.com/gitwithashishroy/codearoy.git" main:gh-pages
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+  
