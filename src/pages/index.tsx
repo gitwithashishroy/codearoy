@@ -13,6 +13,7 @@ export default function Home() {
       </Head>
       <main>
       <NameAnimation />
+      <h1> this is preview enivornment </h1>
       </main>
     </div>
   )
