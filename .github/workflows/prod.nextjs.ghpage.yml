@@ -6,6 +6,10 @@ on:
       - main
     types: [closed]
 
+
+env:
+   NODE_AUTH_TOKEN : ${{ secrets.PAT_TOKEN }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -32,7 +36,5 @@ jobs:
           git checkout main
           git add .
           git commit -m "Deploy to GitHub Pages (Prod)"
-          git push -f "https://$PAT_TOKEN@github.com/gitwithashishroy/codearoy.git" main:gh-pages
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          git push -f "https://$NODE_AUTH_TOKEN@github.com/gitwithashishroy/codearoy.git" main:gh-pages
   
