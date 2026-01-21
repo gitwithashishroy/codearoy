@@ -1,0 +1,86 @@
+@use '../../../styles/breakpoints' as bp;
+
+.footer {
+  background: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border);
+  padding: 3rem 0 1.5rem;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footerSection {
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+}
+
+.footerSocial {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--color-card-bg);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: translateY(-0.125rem);
+  }
+}
+
+.footerBottom {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .footerContent {
+    grid-template-columns: 1fr;
+  }
+}
+
+@include bp.mobile {
+  .footer {
+    padding: 2rem 0 1rem;
+  }
+}

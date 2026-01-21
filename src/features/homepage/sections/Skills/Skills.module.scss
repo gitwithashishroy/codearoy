@@ -1,0 +1,118 @@
+@use '../../../../styles/breakpoints' as bp;
+
+.skills {
+  padding: 5rem 0;
+  background: linear-gradient(180deg, var(--color-bg-secondary) 0%, rgba(15, 23, 42, 0.02) 100%);
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+  gap: 1.25rem 1.5rem;
+  max-width: 80rem;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.skillCard {
+  background: var(--color-bg-primary);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem 1.25rem;
+  transition:
+    transform 180ms var(--transition-ease),
+    box-shadow 180ms var(--transition-ease),
+    border-color 180ms var(--transition-ease);
+  height: -webkit-fill-available;
+
+  &:hover {
+    transform: translateY(-6px);
+    border-color: rgba(var(--color-primary-rgb), 0.85);
+    box-shadow: 0 8px 30px rgba(2, 6, 23, 0.12);
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--color-primary-rgb), 0.1),
+    rgba(var(--color-primary-rgb), 0.06)
+  );
+  color: var(--color-text-primary);
+  flex-shrink: 0;
+  font-size: 1.15rem;
+}
+
+.category {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.skillList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+}
+
+.skillItem {
+  width: fit-content;
+  padding: 0.45rem 0.85rem;
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 999px;
+  color: var(--color-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition:
+    transform 140ms var(--transition-ease),
+    background 140ms var(--transition-ease),
+    color 140ms var(--transition-ease);
+
+  &:hover {
+    background: linear-gradient(
+      90deg,
+      rgba(var(--color-primary-rgb), 0.12),
+      rgba(var(--color-primary-rgb), 0.06)
+    );
+    border-color: rgba(var(--color-primary-rgb), 0.85);
+    color: var(--color-text-primary);
+    transform: translateY(-3px);
+  }
+}
+
+@include bp.mobile {
+  .skills {
+    padding: 4rem 0;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .skillsGrid {
+    grid-template-columns: 1fr;
+  }
+}

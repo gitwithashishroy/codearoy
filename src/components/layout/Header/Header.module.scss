@@ -1,0 +1,139 @@
+@use '../../../styles/breakpoints' as bp;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid var(--color-border);
+  backdrop-filter: blur(20px);
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 6rem;
+  max-width: 100%;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: all var(--transition-base);
+
+  span {
+    color: var(--color-primary);
+  }
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navLinks {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.navLink:hover,
+.navLinkActive {
+  color: var(--color-primary);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 0;
+  height: 0.125rem;
+  background: var(--gradient-primary);
+  transition: width var(--transition-base);
+  border-radius: var(--radius-full);
+}
+
+.navLink:hover::after,
+.navLinkActive::after {
+  width: 100%;
+}
+
+.resumeButton {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-weight: 500;
+  transition: all var(--transition-base);
+  text-decoration: none;
+
+  &:hover {
+    border-color: var(--color-primary);
+    background: rgba(96, 165, 250, 0.1);
+    color: var(--color-primary);
+  }
+}
+
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--color-text-primary);
+  font-size: 1.5rem;
+}
+@include bp.mobile {
+  .navLinks {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    gap: 0;
+  }
+
+  .navLinksOpen {
+    display: flex;
+  }
+
+  .navLink {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .resumeButton {
+    display: none;
+  }
+
+  .mobileMenuButton {
+    display: block;
+  }
+}
