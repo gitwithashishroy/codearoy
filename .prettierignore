@@ -1,0 +1,14 @@
+/out
+/.next
+/node_modules
+/dist
+.turbo
+.vercel
+/*.log
+coverage
+public/images
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.svg

@@ -1,0 +1,68 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Variants */
+.button-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.button-primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 0.125rem solid var(--color-primary);
+}
+
+.button-secondary:hover:not(:disabled) {
+  background: var(--color-primary);
+  color: white;
+}
+
+.button-ghost {
+  background: transparent;
+  color: var(--color-text-primary);
+}
+
+.button-ghost:hover:not(:disabled) {
+  background: var(--color-card-bg);
+}
+
+/* Sizes */
+.button-small {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.button-large {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+/* Full width */
+.button-full {
+  width: 100%;
+}

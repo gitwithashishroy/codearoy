@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   reactStrictMode: true,
-}
+  sassOptions: {
+    includePaths: ['./src/styles'],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

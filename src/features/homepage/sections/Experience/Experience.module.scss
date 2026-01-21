@@ -1,0 +1,111 @@
+.experience {
+  padding: 4rem 0;
+  color: var(--text, #cbd5e1);
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--accent, #6ee7ff);
+  margin-bottom: 2rem;
+}
+
+.timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.line {
+  position: absolute;
+  left: 80px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.item {
+  display: flex;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  align-items: flex-start;
+}
+
+.marker {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #57c7ff, #2b9cff);
+  box-shadow: 0 0 0 6px rgba(43, 156, 255, 0.08);
+  margin-left: 68px;
+  margin-top: 6px;
+}
+
+.content {
+  padding-left: 1rem;
+  max-width: 780px;
+}
+
+.date {
+  color: #58b6d8;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.role {
+  margin: 0.15rem 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #e6eef8;
+}
+
+.company {
+  color: #98a8b9;
+  margin-bottom: 0.75rem;
+}
+
+.points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.points li {
+  margin: 0.6rem 0;
+  color: #9fb1c3;
+}
+
+.group {
+  margin: 0.75rem 0;
+}
+
+.pointTitle {
+  font-weight: 700;
+  color: #e6eef8;
+  margin-bottom: 0.35rem;
+}
+
+.sublist {
+  list-style: disc;
+  margin: 0.35rem 0 0 1rem;
+  padding: 0;
+}
+
+.subitem {
+  margin: 0.4rem 0;
+  color: #9fb1c3;
+}
+
+@media (max-width: 720px) {
+  .line {
+    left: 40px;
+  }
+  .marker {
+    margin-left: 28px;
+  }
+  .content {
+    padding-left: 0.5rem;
+  }
+}

@@ -1,0 +1,137 @@
+.dsa-header {
+  padding: 4rem 0 2rem;
+  text-align: center;
+}
+
+.dsa-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.stats-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.stat-box {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.5rem;
+}
+
+.difficulty-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.difficulty-card {
+  text-align: center;
+  padding: 2rem;
+}
+
+.difficulty-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.difficulty-easy {
+  color: var(--color-success);
+}
+
+.difficulty-medium {
+  color: var(--color-warning);
+}
+
+.difficulty-hard {
+  color: var(--color-error);
+}
+
+.progress-circle {
+  width: 7.5rem;
+  height: 7.5rem;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  border: 0.5rem solid;
+}
+
+.progress-circle-easy {
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.progress-circle-medium {
+  border-color: var(--color-warning);
+  color: var(--color-warning);
+}
+
+.progress-circle-hard {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.submissions-list {
+  margin-top: 2rem;
+}
+
+.submission-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background: var(--color-bg-secondary);
+  border-radius: 8px;
+}
+
+.submission-title {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.submission-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.submission-status {
+  color: var(--color-success);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .dsa-title {
+    font-size: 2rem;
+  }
+
+  .submission-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
