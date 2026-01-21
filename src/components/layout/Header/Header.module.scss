@@ -1,3 +1,5 @@
+@use '../../../styles/breakpoints' as bp;
+
 .header {
   position: fixed;
   top: 0;
@@ -103,8 +105,7 @@
   color: var(--color-text-primary);
   font-size: 1.5rem;
 }
-
-@media (max-width: 768px) {
+@include bp.mobile {
   .navLinks {
     display: none;
     position: absolute;

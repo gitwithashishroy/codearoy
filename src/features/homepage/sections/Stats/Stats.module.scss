@@ -1,3 +1,5 @@
+@use '../../../../styles/breakpoints' as bp;
+
 .stats {
   padding: 4rem 0;
   background: var(--color-bg-primary);
@@ -150,6 +152,21 @@
 }
 
 @media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .statCard {
+    padding: 1.5rem;
+  }
+
+  .statContent .value {
+    font-size: 2rem;
+  }
+}
+
+@include bp.mobile {
   .statsGrid {
     grid-template-columns: 1fr;
     gap: 1rem;

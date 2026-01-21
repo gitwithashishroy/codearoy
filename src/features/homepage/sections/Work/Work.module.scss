@@ -1,3 +1,5 @@
+@use '../../../../styles/breakpoints' as bp;
+
 .work {
   padding: 6rem 0;
   background: var(--color-bg-primary);
@@ -154,7 +156,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@include bp.tablet {
   .workItem {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -171,7 +173,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@include bp.mobile {
   .sectionTitle {
     font-size: 2rem;
     margin-bottom: 3rem;

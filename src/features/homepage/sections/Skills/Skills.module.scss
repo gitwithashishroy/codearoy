@@ -1,3 +1,5 @@
+@use '../../../../styles/breakpoints' as bp;
+
 .skills {
   padding: 5rem 0;
   background: linear-gradient(180deg, var(--color-bg-secondary) 0%, rgba(15, 23, 42, 0.02) 100%);
@@ -96,7 +98,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@include bp.mobile {
   .skills {
     padding: 4rem 0;
   }

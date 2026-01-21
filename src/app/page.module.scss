@@ -1,3 +1,5 @@
+@use '../styles/breakpoints' as bp;
+
 .hero {
   min-height: 70vh;
   display: flex;
@@ -88,5 +90,11 @@
 
   .stats-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@include bp.mobile {
+  .hero {
+    padding: 3rem 0;
   }
 }

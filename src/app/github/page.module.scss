@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as bp;
+
 .github-header {
   padding: 4rem 0 2rem;
   text-align: center;
@@ -130,5 +132,11 @@
 
   .repos-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@include bp.mobile {
+  .github-header {
+    padding: 3rem 0 1.5rem;
   }
 }

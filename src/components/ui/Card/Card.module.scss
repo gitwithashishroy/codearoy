@@ -1,3 +1,5 @@
+@use '../../../styles/breakpoints' as bp;
+
 .card {
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
@@ -54,4 +56,14 @@
 
 .card-elevated {
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
+}
+
+@include bp.mobile {
+  .card {
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+  }
 }

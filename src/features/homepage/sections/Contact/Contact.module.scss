@@ -1,3 +1,5 @@
+@use '../../../../styles/breakpoints' as bp;
+
 .contact {
   padding: 6rem 0;
   background: var(--color-bg-primary);
@@ -134,7 +136,7 @@
   min-height: 9.375rem;
 }
 
-@media (max-width: 1024px) {
+@include bp.tablet {
   .content {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -146,7 +148,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@include bp.mobile {
   .contact {
     padding: 4rem 0;
   }

@@ -1,3 +1,5 @@
+@use '../../../../styles/breakpoints' as bp;
+
 .experience {
   padding: 4rem 0;
   color: var(--text, #cbd5e1);
@@ -99,6 +101,18 @@
 }
 
 @media (max-width: 720px) {
+  .line {
+    left: 40px;
+  }
+  .marker {
+    margin-left: 28px;
+  }
+  .content {
+    padding-left: 0.5rem;
+  }
+}
+
+@include bp.mobile {
   .line {
     left: 40px;
   }

@@ -1,13 +1,25 @@
-@use '../../../../styles/breakpoints' as bp;
-
 .hero {
+  position: relative;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  padding: 4rem 4rem;
-  gap: 6rem;
+  padding: 6rem 0;
+  overflow: hidden;
   background: var(--color-bg-primary);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50rem;
+    height: 50rem;
+    background: var(--gradient-glow);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }
 
 .container {
@@ -20,15 +32,7 @@
 }
 
 .content {
-  max-width: calc(100%);
-
-  .greeting {
-    font-size: 1.125rem;
-    margin-bottom: 1rem;
-    color: #38bdf8;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
+  max-width: 37.5rem;
 }
 
 .badge {
@@ -46,10 +50,11 @@
 }
 
 .title {
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
 
   .white {
     color: var(--color-text-primary);
@@ -94,7 +99,7 @@
   font-family: inherit;
 }
 
-.buttonPrimary {
+.button-primary {
   background: var(--gradient-primary);
   color: white;
   box-shadow: var(--shadow-glow);
@@ -105,7 +110,7 @@
   }
 }
 
-.buttonSecondary {
+.button-secondary {
   background: transparent;
   color: var(--color-text-primary);
   border: 2px solid var(--color-border-strong);
@@ -117,14 +122,14 @@
 }
 
 .visual {
+  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .illustration {
-  position: absolute;
+  position: relative;
   width: 31.25rem;
   height: 31.25rem;
   display: flex;
@@ -134,14 +139,16 @@
   img {
     width: 100%;
     height: 100%;
-    border-radius: 2rem;
+    object-fit: contain;
+    filter: drop-shadow(0 0 2.5rem rgba(96, 165, 250, 0.3));
+    animation: float 6s ease-in-out infinite;
   }
 }
 
-.codeSnippet {
-  position: relative;
-  bottom: -15rem;
-  left: -10rem;
+.code-snippet {
+  position: absolute;
+  bottom: 3.125rem;
+  left: 3.125rem;
   background: rgba(15, 23, 42, 0.95);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-lg);
@@ -149,13 +156,11 @@
   backdrop-filter: blur(1.25rem);
   box-shadow: var(--shadow-xl);
   overflow: hidden;
-  filter: drop-shadow(0 0 2.5rem rgba(96, 165, 250, 0.3));
-  animation: float 6s ease-in-out infinite;
 
-  img {
+  .codeImage {
+    display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
   }
 }
 
@@ -169,7 +174,7 @@
   }
 }
 
-@include bp.tablet {
+@media (max-width: 1024px) {
   .container {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -188,7 +193,7 @@
     height: 400px;
   }
 
-  .codeSnippet {
+  .code-snippet {
     position: relative;
     bottom: auto;
     left: auto;
@@ -196,7 +201,7 @@
   }
 }
 
-@include bp.mobile {
+@media (max-width: 768px) {
   .title {
     font-size: 2.5rem;
   }
@@ -218,7 +223,7 @@
     height: 300px;
   }
 
-  .codeSnippet {
+  .code-snippet {
     min-width: auto;
     width: 100%;
   }

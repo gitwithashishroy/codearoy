@@ -1,3 +1,5 @@
+@use '../../../styles/breakpoints' as bp;
+
 .container {
   width: 100%;
   max-width: 75rem;
@@ -17,7 +19,7 @@
   padding: 0 1.5rem;
 }
 
-@media (max-width: 768px) {
+@include bp.mobile {
   .container,
   .container-fluid,
   .container-narrow {

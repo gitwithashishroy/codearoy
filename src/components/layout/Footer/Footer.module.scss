@@ -1,3 +1,5 @@
+@use '../../../styles/breakpoints' as bp;
+
 .footer {
   background: var(--color-bg-secondary);
   border-top: 1px solid var(--color-border);
@@ -74,5 +76,11 @@
 @media (max-width: 768px) {
   .footerContent {
     grid-template-columns: 1fr;
+  }
+}
+
+@include bp.mobile {
+  .footer {
+    padding: 2rem 0 1rem;
   }
 }
