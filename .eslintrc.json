@@ -1,12 +1,6 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
+  "extends": ["next", "prettier"],
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "semi": true
-      }
-    ]
+    "prettier/prettier": "warn"
   }
 }

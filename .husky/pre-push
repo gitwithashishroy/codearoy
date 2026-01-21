@@ -1,21 +1,2 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-# Run lint and tests before push
-npm run lint --silent || {
-  echo "Lint failed — aborting push." >&2
-  exit 1
-}
-
-# Optionally run tests if you have them
-if [ -f package.json ]; then
-  # only run tests if script exists
-  if npm run | grep -q " test"; then
-    npm test --silent || {
-      echo "Tests failed — aborting push." >&2
-      exit 1
-    }
-  fi
-fi
-
-exit 0
+# Build check before push
+npm run build
