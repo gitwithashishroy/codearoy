@@ -104,16 +104,21 @@
 .visual {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   width: 100%;
+
+  @include bp.mobile {
+    display: none;
+  }
+
+  @include bp.tablet {
+    display: none;
+  }
 }
 
 .illustration {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 90%;
 
   img {
@@ -126,7 +131,7 @@
 .codeSnippet {
   position: relative;
   bottom: 10rem;
-  left: -15rem;
+  left: -25rem;
   background: rgba(15, 23, 42, 0.95);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-lg);
@@ -157,7 +162,8 @@
 @include bp.tablet {
   .container {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    align-items: center;
+    justify-content: center;
   }
 
   .title {

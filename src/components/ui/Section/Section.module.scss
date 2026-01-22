@@ -2,7 +2,10 @@
 
 .section {
   padding: 4rem 0;
-  width: 90%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sectionHeader {
@@ -24,9 +27,23 @@
   margin: 0 auto;
 }
 
+@include bp.tablet {
+  .section {
+    padding: 2rem;
+  }
+
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+
+  .sectionSubtitle {
+    font-size: 1.125rem;
+  }
+}
+
 @include bp.mobile {
   .section {
-    padding: 3rem 0;
+    padding: 1rem;
   }
 
   .sectionTitle {

@@ -2,14 +2,7 @@ import React from 'react';
 import styles from './GithubCard.module.scss';
 import { GitHubStats } from '@/types/github';
 import { Icons } from '@/components/Constant';
-import {
-  StatsCard,
-  ContributionGraph,
-  WeeklyActivity,
-  TopLanguages,
-  RecentRepositories,
-} from './components';
-import { Container, Section } from '@/components/ui';
+import { StatsCard, ContributionGraph, WeeklyActivity } from './components';
 
 interface GitHubCardProps {
   stats: GitHubStats;

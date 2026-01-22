@@ -1,4 +1,4 @@
-import { Section } from '@/components/ui';
+import { Container, Section } from '@/components/ui';
 import { GitHubCard } from '@/features/github/GithubCard';
 import { LeetCodeCard } from '@/features/leetcode/LeetcodeCard';
 import { getLeetCodeStats } from '@/features/leetcode/action';
@@ -13,12 +13,16 @@ export const CodingProfile: React.FC = async () => {
 
   return (
     <Section>
-      <div className={styles.codingProfile}>
-        <div className={styles.githubCard}>{githubStats && <GitHubCard stats={githubStats} />}</div>
-        <div className={styles.leetCodeCard}>
-          {leetcodeStats && <LeetCodeCard stats={leetcodeStats} />}
+      <Container>
+        <div className={styles.codingProfile}>
+          <div className={styles.githubCard}>
+            {githubStats && <GitHubCard stats={githubStats} />}
+          </div>
+          <div className={styles.leetCodeCard}>
+            {leetcodeStats && <LeetCodeCard stats={leetcodeStats} />}
+          </div>
         </div>
-      </div>
+      </Container>
     </Section>
   );
 };

@@ -8,10 +8,13 @@ interface ContributionGraphProps {
   contributions?: Array<{ date: string; contributionCount: number; color: string }>;
 }
 
-export const ContributionGraph: React.FC<ContributionGraphProps> = ({
-  totalCommits,
-  contributions,
-}) => {
+interface DayData {
+  date: Date;
+  level: number;
+  count: number;
+}
+
+export const ContributionGraph: React.FC<ContributionGraphProps> = ({ contributions }) => {
   const currentYear = new Date().getFullYear();
   const [selectedYear, setSelectedYear] = useState(currentYear);
 
@@ -20,81 +23,118 @@ export const ContributionGraph: React.FC<ContributionGraphProps> = ({
     return Array.from({ length: 5 }, (_, i) => currentYear - i);
   }, [currentYear]);
 
-  // Helper function to generate seeded data for a specific year
-  function generateSeededDataForYear(year: number) {
+  // Helper function to generate seeded random level for a date
+  function getSeededLevel(date: Date): number {
     const seededRandom = (seed: number) => {
       const x = Math.sin(seed) * 10000;
       return x - Math.floor(x);
     };
 
-    // 53 columns (weeks) x 7 rows (days) = 371 squares (full year)
-    return Array.from({ length: 371 }).map((_, i) => {
-      // Use year as part of seed for different patterns per year
-      const factor = Math.sin(i / 15) * 2 + seededRandom(i + 42 + year) * 5;
-      if (factor < 1.5) return 0;
-      if (factor < 3) return 1;
-      if (factor < 4.5) return 2;
-      if (factor < 6) return 3;
-      return 4;
-    });
+    const dayOfYear = Math.floor(
+      (date.getTime() - new Date(date.getFullYear(), 0, 0).getTime()) / 86400000
+    );
+    const factor =
+      Math.sin(dayOfYear / 15) * 2 + seededRandom(dayOfYear + 42 + date.getFullYear()) * 5;
+
+    if (factor < 1.5) return 0;
+    if (factor < 3) return 1;
+    if (factor < 4.5) return 2;
+    if (factor < 6) return 3;
+    return 4;
   }
 
-  // Generate contribution data from real data or fallback to seeded randomness
-  const contributionData = useMemo(() => {
-    if (contributions && contributions.length > 0) {
-      // Filter contributions by selected year
-      const yearContributions = contributions.filter((day) => {
-        const year = new Date(day.date).getFullYear();
-        return year === selectedYear;
-      });
+  // Generate weeks data with actual dates
+  const { weeksData, monthPositions } = useMemo(() => {
+    // Start from first Sunday of the year (or last Sunday of previous year)
+    const yearStart = new Date(selectedYear, 0, 1);
+    const firstDay = yearStart.getDay(); // 0 = Sunday, 6 = Saturday
 
-      // If no contributions for selected year, generate seeded data for that year
-      if (yearContributions.length === 0) {
-        return generateSeededDataForYear(selectedYear);
-      }
+    // Calculate the starting date (go back to previous Sunday if needed)
+    const startDate = new Date(yearStart);
+    startDate.setDate(yearStart.getDate() - firstDay);
 
-      // Use real contribution data from GitHub GraphQL API
-      // Convert to level-based system (0-4) for consistent styling
-      return yearContributions.map((day) => {
-        const count = day.contributionCount;
-        if (count === 0) return 0;
-        if (count <= 2) return 1;
-        if (count <= 4) return 2;
-        if (count <= 6) return 3;
-        return 4;
+    // End date is always December 31st of the selected year (show full year including future)
+    const yearEnd = new Date(selectedYear, 11, 31);
+    const lastDay = yearEnd.getDay();
+    const endDate = new Date(yearEnd);
+    endDate.setDate(yearEnd.getDate() + (6 - lastDay));
+
+    // Create contribution map from real data
+    const contributionMap = new Map<string, number>();
+    if (contributions) {
+      contributions.forEach((c) => {
+        const date = new Date(c.date);
+        if (date.getFullYear() === selectedYear) {
+          contributionMap.set(c.date.split('T')[0], c.contributionCount);
+        }
       });
     }
 
-    // Fallback: generate seeded data for selected year
-    return generateSeededDataForYear(selectedYear);
-  }, [contributions, selectedYear]);
+    // Generate weeks array (each week has 7 days)
+    const weeks: DayData[][] = [];
+    const monthPos: Array<{ month: string; weekIndex: number }> = [];
+    let currentMonth = -1;
+
+    let currentDate = new Date(startDate);
+    while (currentDate <= endDate) {
+      const week: DayData[] = [];
+
+      for (let day = 0; day < 7; day++) {
+        const dateStr = currentDate.toISOString().split('T')[0];
+        const isInYear = currentDate.getFullYear() === selectedYear;
+        const isFuture = currentDate > new Date(); // Check if date is in the future
+
+        let count = 0;
+        let level = 0;
+
+        if (isInYear && !isFuture) {
+          if (contributionMap.has(dateStr)) {
+            count = contributionMap.get(dateStr)!;
+            // Convert to level
+            if (count === 0) level = 0;
+            else if (count <= 2) level = 1;
+            else if (count <= 4) level = 2;
+            else if (count <= 6) level = 3;
+            else level = 4;
+          } else {
+            // Use seeded random for fallback
+            level = getSeededLevel(currentDate);
+            count = level * 2; // Estimate count from level
+          }
+        }
+        // Future dates and out-of-year dates remain at level 0
+
+        week.push({
+          date: new Date(currentDate),
+          level: isInYear ? level : 0,
+          count,
+        });
+
+        // Track month changes for labels
+        const month = currentDate.getMonth();
+        if (month !== currentMonth && day === 0 && isInYear) {
+          currentMonth = month;
+          monthPos.push({
+            month: currentDate.toLocaleDateString('en-US', { month: 'short' }),
+            weekIndex: weeks.length,
+          });
+        }
+
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+
+      weeks.push(week);
+    }
+
+    return { weeksData: weeks, monthPositions: monthPos };
+  }, [selectedYear, contributions, currentYear]);
 
   // Calculate commits for selected year
   const yearCommits = useMemo(() => {
-    if (contributions && contributions.length > 0) {
-      return contributions
-        .filter((day) => new Date(day.date).getFullYear() === selectedYear)
-        .reduce((sum, day) => sum + day.contributionCount, 0);
-    }
-    // Estimate for seeded data
-    return Math.floor(totalCommits / 2);
-  }, [contributions, selectedYear, totalCommits]);
-
-  // Month labels for the contribution graph
-  const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
+    return weeksData.reduce((sum, week) => {
+      return sum + week.reduce((weekSum, day) => weekSum + day.count, 0);
+    }, 0);
+  }, [weeksData]);
 
   return (
     <div className={styles.ghChartSection}>
@@ -116,9 +156,12 @@ export const ContributionGraph: React.FC<ContributionGraphProps> = ({
       </div>
       <div className={styles.ghHeatmapWrapper}>
         {/* Month labels */}
-        <div className={styles.ghMonthLabels}>
-          {months.map((month, idx) => (
-            <span key={month} style={{ gridColumn: `${Math.floor(idx * 4.4 + 1)} / span 4` }}>
+        <div
+          className={styles.ghMonthLabels}
+          style={{ gridTemplateColumns: `repeat(${weeksData.length}, minmax(0.625rem, 1fr))` }}
+        >
+          {monthPositions.map(({ month, weekIndex }) => (
+            <span key={`${month}-${weekIndex}`} style={{ gridColumn: `${weekIndex + 1} / span 1` }}>
               {month}
             </span>
           ))}
@@ -127,23 +170,37 @@ export const ContributionGraph: React.FC<ContributionGraphProps> = ({
         <div className={styles.ghHeatmapContainer}>
           {/* Day labels */}
           <div className={styles.ghDayLabels}>
-            <span style={{ gridRow: '1' }}>Mon</span>
-            <span style={{ gridRow: '3' }}>Wed</span>
-            <span style={{ gridRow: '5' }}>Fri</span>
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
           </div>
 
-          {/* Contribution grid */}
-          <div className={styles.ghHeatmapGrid}>
-            {contributionData.map((level, i) => (
-              <div
-                key={i}
-                className={`${styles.ghHeatSquare} ${styles[`ghHeatL${level}`]}`}
-                title={`Level ${level} contributions`}
-              />
-            ))}
+          {/* Contribution grid - organized by weeks */}
+          <div
+            className={styles.ghHeatmapGrid}
+            style={{ gridTemplateColumns: `repeat(${weeksData.length}, minmax(0.625rem, 1fr))` }}
+          >
+            {weeksData.map((week, weekIdx) =>
+              week.map((day, dayIdx) => (
+                <div
+                  key={`${weekIdx}-${dayIdx}`}
+                  className={`${styles.ghHeatSquare} ${styles[`ghHeatL${day.level}`]}`}
+                  title={`${day.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}: ${day.count} contributions`}
+                  style={{
+                    gridColumn: weekIdx + 1,
+                    gridRow: dayIdx + 1,
+                  }}
+                />
+              ))
+            )}
           </div>
         </div>
 
+        {/* Footer - sticky at bottom */}
         <div className={styles.ghHeatmapFooter}>
           <span>Less</span>
           <div className={`${styles.ghLegendItem} ${styles.ghHeatL0}`} />

@@ -1,7 +1,10 @@
+@use '../../../../styles/breakpoints' as bp;
+
 .codingProfile {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
+  width: 100%;
 }
 
 .githubCard {
@@ -10,4 +13,18 @@
 
 .leetCodeCard {
   grid-column: 4/5;
+}
+
+@include bp.tablet {
+  .codingProfile {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@include bp.mobile {
+  .codingProfile {
+    display: flex;
+    flex-direction: column;
+  }
 }
