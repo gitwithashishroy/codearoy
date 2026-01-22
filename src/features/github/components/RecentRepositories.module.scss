@@ -1,0 +1,67 @@
+.ghRepoSection h4 {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 0.75rem;
+}
+
+.ghRepoList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ghRepoItem {
+  padding: 0.75rem;
+  background: var(--color-subcard-bg);
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+
+.ghRepoItem:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-subcard-bg-hover);
+}
+
+.ghRepoTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.25rem;
+}
+
+.ghRepoName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.ghStars {
+  svg {
+    width: 0.75rem;
+    height: 0.75rem;
+    flex-shrink: 0;
+  }
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+.ghRepoDesc {
+  font-size: 0.6875rem;
+  color: #94a3b8;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin: 0;
+}

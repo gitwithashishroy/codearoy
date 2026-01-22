@@ -1,38 +1,9 @@
 @use '../../../../styles/breakpoints' as bp;
 
-.contact {
-  padding: 6rem 0;
-  background: var(--color-bg-primary);
-}
-
-.title {
-  font-size: 3rem;
-  font-weight: 700;
-  text-align: center;
-  color: var(--color-text-primary);
-  margin-bottom: 1rem;
-}
-
-.subtitle {
-  font-size: 1.125rem;
-  text-align: center;
-  color: var(--color-text-secondary);
-  margin-bottom: 4rem;
-}
-
 .content {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  max-width: 50%;
-  margin: 0 auto;
-  align-items: start;
-}
-
-.contactInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
 }
 
 .infoCard {
