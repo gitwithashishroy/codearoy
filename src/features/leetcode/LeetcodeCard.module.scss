@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as bp;
+
 .lcCard {
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
@@ -350,21 +352,17 @@
 }
 
 // Responsive styles
-@media (max-width: 1024px) {
+@include bp.tablet {
   .lcCard {
     padding: 1.25rem;
   }
 
   .lcMainStats {
-    grid-template-columns: 1fr 1fr;
-
-    .lcStatBox:last-child {
-      grid-column: 1 / -1;
-    }
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
-@media (max-width: 768px) {
+@include bp.mobile {
   .lcCard {
     padding: 1rem;
   }
@@ -376,13 +374,13 @@
   }
 
   .lcVisualization {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     gap: 1.5rem;
+    justify-content: space-between;
   }
 
   .lcPieWrapper {
-    width: 100%;
     max-width: 12rem;
   }
 
@@ -391,16 +389,16 @@
   }
 
   .lcMainStats {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
 
     .lcStatBox:last-child {
-      grid-column: 1;
+      grid-column: 1/3;
     }
   }
 
   .lcStreakStats {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 0.75rem;
   }
 }

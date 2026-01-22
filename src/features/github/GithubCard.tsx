@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './GithubCard.module.scss';
-import { GitHubStats } from '@/types/github';
 import { Icons } from '@/components/Constant';
 import { StatsCard, ContributionGraph, WeeklyActivity } from './components';
+import { GitHubStats } from './github.types';
 
 interface GitHubCardProps {
   stats: GitHubStats;

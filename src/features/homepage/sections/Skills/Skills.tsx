@@ -9,7 +9,6 @@ export default async function Skills() {
   return (
     <Section
       id="skills"
-      className={styles.skills}
       title="Tech Stack"
       subtitle="Technologies and tools I use to bring ideas to life"
     >

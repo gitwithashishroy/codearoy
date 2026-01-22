@@ -4,6 +4,9 @@ import Image from 'next/image';
 import styles from './Hero.module.scss';
 import { PERSONAL_DETAILS } from '@/config/PERSONAL_DETAILS_CONFIG';
 import { Container, Section } from '@/components/ui';
+import { Icons } from '@/components/Constant';
+import React from 'react';
+import { BiDownArrow } from 'react-icons/bi';
 
 export default function Hero() {
   const hero = PERSONAL_DETAILS.hero;
@@ -17,6 +20,20 @@ export default function Hero() {
         behavior: 'smooth',
       });
     }
+  };
+
+  const DownloadResume = () => {
+    // Use direct download link from Google Drive
+    const fileId = '1ng4cXFhU4gY837-boXX3yIi-80YAzBn5';
+    const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = 'Ashish_Kumar_Roy_Resume.pdf';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -39,10 +56,10 @@ export default function Hero() {
 
             <div className={styles.actions}>
               <button
-                onClick={() => scrollToSection(hero.actions.primary.target)}
+                onClick={DownloadResume}
                 className={`${styles.button} ${styles.buttonPrimary}`}
               >
-                {hero.actions.primary.label}
+                {'Download CV'}
               </button>
               <button
                 onClick={() => scrollToSection(hero.actions.secondary.target)}

@@ -192,42 +192,27 @@ export const PERSONAL_DETAILS: PersonalDetails = {
         {
           title: 'Course Search CoPilot Platform',
           items: [
-            `Architected UI for an AI-assisted course search tool enabling discovery across 500+ courses and 130+
-              universities using conversational inputs and structured filters, with analytics dashboards for tuition fees, intake
-              cycles, rankings, and waiver insights.`,
-            `Enhanced decision-making and exploration workflows through shortlisting and comparison features, reducing
-            search friction by ~40–50% and improving conversion readiness.`,
+            `Architected UI for AI-assisted course search across 500+ courses and 130+ universities with conversational inputs, analytics dashboards, and comparison features, reducing search friction by ~40–50%.`,
           ],
         },
         {
           title: 'Application Processing & Automation System',
           items: [
-            `Built UI workflows for AI-driven document extraction and tagging, automated form population, expert review,
-validation checkpoints, and multi-university submissions, reducing manual workload by ~90% and improving
-turnaround time by 60–70%.`,
-            `Added requirement completion, pipeline visibility, and submission tracking to minimise operational errors and
-enable scalable application handling with reduced human dependencies.`,
+            `Built UI workflows for AI-driven document extraction, automated form population, expert review, and multi-university submissions, reducing manual workload by ~90% and improving turnaround time by 60–70%.`,
           ],
         },
         {
           title: 'Lead Management System (Odyssey)',
           items: [
-            `Contributed in developing role-based LMS modules with configuration-driven UI, requirement tracking, and
-expert handoff workflows, improving daily lead handling efficiency by 15%, stage processing time by 30%, and
-user proficiency by 25%.`,
-            `Optimized data fetching via SWR-based caching for leads information, eliminating redundant API calls and
-improving interface responsiveness while lowering support ticket volume`,
+            `Developed role-based LMS modules with configuration-driven UI and requirement tracking, improving daily lead handling efficiency by 15% and stage processing time by 30%.`,
+            `Optimized data fetching via SWR-based caching, eliminating redundant API calls and improving interface responsiveness.`,
           ],
         },
         {
-          title: 'Dynamic Form Builder & Configurable Form Versioning System (Backend Integration)',
+          title: 'Dynamic Form Builder & Versioning System',
           items: [
-            `Engineered a configurable form builder with multi-column layouts, field-level configs, centralized validation, and
-Context/Reducer state management, enabling non-engineering teams to build complex forms without code
-changes.`,
-            `Integrated MongoDB-backed schema versioning supporting rollout/rollback and active/inactive control,
-reducing deployment cycles by ~80–90% since form updates no longer required code modifications or
-redeployments.`,
+            `Engineered a configurable form builder with multi-column layouts, field-level configs, and centralized validation, enabling non-engineering teams to build complex forms without code changes.`,
+            `Integrated MongoDB-backed schema versioning with rollout/rollback control, reducing deployment cycles by ~80–90%.`,
           ],
         },
       ],

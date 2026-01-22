@@ -5,6 +5,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   width: 100%;
+  margin-top: -12rem;
 }
 
 .githubCard {
@@ -19,6 +20,7 @@
   .codingProfile {
     display: flex;
     flex-direction: column;
+    margin-top: 0rem;
   }
 }
 
@@ -26,5 +28,6 @@
   .codingProfile {
     display: flex;
     flex-direction: column;
+    margin-top: 0rem;
   }
 }

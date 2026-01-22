@@ -28,25 +28,23 @@
 }
 
 .item {
-  display: flex;
-  gap: 1.5rem;
+  position: relative;
+  padding-left: 8rem;
   margin: 2rem 0;
-  align-items: flex-start;
 }
 
 .marker {
-  position: relative;
-  width: 24px;
-  height: 24px;
+  position: absolute;
+  left: 4.375rem;
+  top: 0.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   background: linear-gradient(180deg, #57c7ff, #2b9cff);
   box-shadow: 0 0 0 6px rgba(43, 156, 255, 0.08);
-  margin-left: 68px;
-  margin-top: 6px;
 }
 
 .content {
-  padding-left: 1rem;
   max-width: 780px;
 }
 
@@ -102,24 +100,24 @@
 
 @media (max-width: 720px) {
   .line {
-    left: 40px;
+    left: 32px;
   }
   .marker {
-    margin-left: 28px;
+    left: 21px;
   }
-  .content {
-    padding-left: 0.5rem;
+  .item {
+    padding-left: 70px;
   }
 }
 
 @include bp.mobile {
   .line {
-    left: 40px;
+    left: 32px;
   }
   .marker {
-    margin-left: 28px;
+    left: 21px;
   }
-  .content {
-    padding-left: 0.5rem;
+  .item {
+    padding-left: 70px;
   }
 }

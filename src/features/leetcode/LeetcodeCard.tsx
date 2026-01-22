@@ -51,7 +51,7 @@ export const LeetCodeCard: React.FC<LeetCodeCardProps> = ({ stats }) => {
           </div>
           <div>
             <h3>LeetCode Stats</h3>
-            <p>@{stats.username}</p>
+            <p>@{stats?.username || 'ashish_roy'}</p>
           </div>
         </div>
         <div className={styles.lcBadgeList}>
