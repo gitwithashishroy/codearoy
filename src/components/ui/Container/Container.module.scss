@@ -1,28 +1,16 @@
 @use '../../../styles/breakpoints' as bp;
 
 .container {
-  width: 100%;
-  max-width: 75rem;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
+  width: 90%;
+  padding: 4rem;
 
-.container-fluid {
-  width: 100%;
-  padding: 0 1.5rem;
-}
+  @include bp.tablet {
+    width: 95%;
+    padding: 2rem;
+  }
 
-.container-narrow {
-  width: 100%;
-  max-width: 50rem;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-@include bp.mobile {
-  .container,
-  .container-fluid,
-  .container-narrow {
-    padding: 0 1rem;
+  @include bp.mobile {
+    width: 100%;
+    padding: 1rem;
   }
 }

@@ -3,8 +3,8 @@
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import styles from './LeetcodeCard.module.scss';
-import { LeetCodeStats } from '@/types/github';
 import { COLORS, Icons } from '@/components/Constant';
+import { LeetCodeStats } from './leetcode';
 
 interface LeetCodeCardProps {
   stats: LeetCodeStats;
@@ -12,18 +12,30 @@ interface LeetCodeCardProps {
 
 export const LeetCodeCard: React.FC<LeetCodeCardProps> = ({ stats }) => {
   const pieData = [
-    { name: 'Easy', value: stats.solved.easy, color: COLORS.easy },
-    { name: 'Medium', value: stats.solved.medium, color: COLORS.medium },
-    { name: 'Hard', value: stats.solved.hard, color: COLORS.hard },
+    {
+      name: 'Easy',
+      value: stats.solutions.filter((s) => s.difficulty === 'Easy').length,
+      color: COLORS.easy,
+    },
+    {
+      name: 'Medium',
+      value: stats.solutions.filter((s) => s.difficulty === 'Medium').length,
+      color: COLORS.medium,
+    },
+    {
+      name: 'Hard',
+      value: stats.solutions.filter((s) => s.difficulty === 'Hard').length,
+      color: COLORS.hard,
+    },
   ];
 
   // Calculate acceptance rate and streak
-  const acceptanceRate = Math.round((stats.solved.total / (stats.solved.total + 100)) * 100);
-  const currentStreak = 15; // Mock data
-  const maxStreak = 45; // Mock data
+  const acceptanceRate = Math.round((stats.totalSolved / (stats.totalSolved + 100)) * 100);
+  const currentStreak = stats.streak?.current || 15;
+  const maxStreak = stats.streak?.longest || 45;
 
   // Problem categories with progress
-  const categories = [
+  const categories = stats.byTopic || [
     { name: 'Array', solved: 120, total: 200, percentage: 60, color: '#3b82f6' },
     { name: 'String', solved: 85, total: 150, percentage: 57, color: '#8b5cf6' },
     { name: 'Dynamic Programming', solved: 45, total: 120, percentage: 38, color: '#ec4899' },
@@ -43,11 +55,12 @@ export const LeetCodeCard: React.FC<LeetCodeCardProps> = ({ stats }) => {
           </div>
         </div>
         <div className={styles.lcBadgeList}>
-          {stats.badges.slice(0, 2).map((b, i) => (
-            <span key={i} className={styles.lcBadge}>
-              {b}
-            </span>
-          ))}
+          {stats.badges &&
+            stats.badges.slice(0, 2).map((b, i) => (
+              <span key={i} className={styles.lcBadge}>
+                {b}
+              </span>
+            ))}
         </div>
       </div>
 
@@ -77,7 +90,7 @@ export const LeetCodeCard: React.FC<LeetCodeCardProps> = ({ stats }) => {
             </PieChart>
           </ResponsiveContainer>
           <div className={styles.lcPieCenter}>
-            <span className={styles.lcTotal}>{stats.solved.total}</span>
+            <span className={styles.lcTotal}>{stats.totalSolved}</span>
             <span className={styles.lcLabel}>Solved</span>
           </div>
         </div>
@@ -117,18 +130,21 @@ export const LeetCodeCard: React.FC<LeetCodeCardProps> = ({ stats }) => {
           <Icons.Trophy /> Problem Categories
         </h4>
         <div className={styles.lcCategoryList}>
-          {categories.map((cat, i) => (
+          {Object.entries(stats.byTopic).map(([name, solved], i) => (
             <div key={i} className={styles.lcCategoryItem}>
               <div className={styles.lcCategoryHeader}>
-                <span className={styles.lcCategoryName}>{cat.name}</span>
+                <span className={styles.lcCategoryName}>{name}</span>
                 <span className={styles.lcCategoryCount}>
-                  {cat.solved}/{cat.total}
+                  {solved}/{Math.round(solved * 2.5)}
                 </span>
               </div>
               <div className={styles.lcProgressBar}>
                 <div
                   className={styles.lcProgressFill}
-                  style={{ width: `${cat.percentage}%`, backgroundColor: cat.color }}
+                  style={{
+                    width: `${(solved / Math.round(solved * 2.5)) * 100}%`,
+                    backgroundColor: '#8b5cf6',
+                  }}
                 />
               </div>
             </div>
@@ -148,50 +164,6 @@ export const LeetCodeCard: React.FC<LeetCodeCardProps> = ({ stats }) => {
           <div className={styles.lcStreakBox}>
             <div className={styles.lcStreakValue}>{maxStreak}</div>
             <div className={styles.lcStreakLabel}>Max Streak</div>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.lcChartSection}>
-        <h4>
-          <Icons.Calendar /> Recent Activity
-        </h4>
-        <div className={styles.lcActivityWrapper}>
-          <div className={styles.lcHeatmap}>
-            {Array.from({ length: 49 }).map((_, i) => {
-              const intensity = Math.sin(i / 7) * 2 + Math.cos(i / 3);
-              let bgColor = '#1a1a1e';
-              if (intensity > 1.5) bgColor = 'rgba(255, 161, 22, 0.6)';
-              else if (intensity > 0.5) bgColor = 'rgba(255, 161, 22, 0.4)';
-              else if (intensity > -0.5) bgColor = 'rgba(255, 161, 22, 0.2)';
-              else if (intensity > -1.5) bgColor = 'rgba(255, 161, 22, 0.1)';
-
-              return (
-                <div
-                  key={i}
-                  className={styles.lcHeatSquare}
-                  style={{ backgroundColor: bgColor }}
-                  title={`Activity level ${Math.floor(intensity + 2)}`}
-                />
-              );
-            })}
-          </div>
-          <div className={styles.lcHeatmapFooter}>
-            <span>Less</span>
-            <div className={styles.lcHeatLegendItem} style={{ backgroundColor: '#1a1a1e' }} />
-            <div
-              className={styles.lcHeatLegendItem}
-              style={{ backgroundColor: 'rgba(255, 161, 22, 0.2)' }}
-            />
-            <div
-              className={styles.lcHeatLegendItem}
-              style={{ backgroundColor: 'rgba(255, 161, 22, 0.4)' }}
-            />
-            <div
-              className={styles.lcHeatLegendItem}
-              style={{ backgroundColor: 'rgba(255, 161, 22, 0.6)' }}
-            />
-            <span>More</span>
           </div>
         </div>
       </div>

@@ -1,26 +1,6 @@
 'use server';
 
-interface GitHubUserData {
-  login: string;
-  public_repos: number;
-  followers: number;
-  created_at: string;
-}
-
-interface GitHubRepo {
-  name: string;
-  description: string | null;
-  stargazers_count: number;
-  language: string | null;
-  updated_at: string;
-  html_url: string;
-}
-
-interface GitHubContribution {
-  date: string;
-  contributionCount: number;
-  color: string;
-}
+import { GitHubContribution, GitHubRepo, GitHubStats, GitHubUserData } from '../github.types';
 
 const GITHUB_API_URL = 'https://api.github.com';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN; // Add this to your .env.local
@@ -175,8 +155,6 @@ export async function fetchGitHubStats(username: string) {
       return null;
     }
 
-    console.log(repos);
-
     // Calculate total stars
     const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
 
@@ -254,6 +232,8 @@ export async function fetchGitHubStats(username: string) {
     // Calculate total commits from contributions
     const totalCommits = contributions.reduce((sum, day) => sum + day.contributionCount, 0);
 
+    console.log(userData);
+
     return {
       username: userData.login,
       totalRepos: userData.public_repos,
@@ -262,8 +242,8 @@ export async function fetchGitHubStats(username: string) {
       followers: userData.followers,
       topLanguages,
       recentRepos,
-      contributions, // Include the contribution calendar data
-    };
+      contributions,
+    } as GitHubStats;
   } catch (error) {
     console.error('Error fetching GitHub stats:', error);
     return null;

@@ -1,4 +1,4 @@
-import { LeetCodeStats } from '@/types/leetcode';
+import { LeetCodeStats } from './leetcode';
 
 export async function getLeetCodeStats(): Promise<LeetCodeStats> {
   const res = await fetch(

@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import styles from './Hero.module.scss';
-import Stats from '../Stats/Stats';
 import { PERSONAL_DETAILS } from '@/config/PERSONAL_DETAILS_CONFIG';
 import { Section } from '@/components/ui';
 
@@ -21,7 +20,7 @@ export default function Hero() {
   };
 
   return (
-    <Section id="home" className={styles.hero}>
+    <Section id="home">
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.greeting}>Hello, I'm {hero.name}</div>
@@ -52,7 +51,6 @@ export default function Hero() {
             </button>
           </div>
         </div>
-
         <div className={styles.visual}>
           <div className={styles.illustration}>
             <Image

@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import styles from './GithubCard.module.scss';
 import { GitHubStats } from '@/types/github';
@@ -11,12 +9,13 @@ import {
   TopLanguages,
   RecentRepositories,
 } from './components';
+import { Container, Section } from '@/components/ui';
 
 interface GitHubCardProps {
   stats: GitHubStats;
 }
 
-export const GitHubCard: React.FC<GitHubCardProps> = ({ stats }) => {
+export const GitHubCard: React.FC<GitHubCardProps> = async ({ stats }) => {
   return (
     <div className={styles.ghCard}>
       <div className={styles.ghHeader}>
@@ -26,11 +25,11 @@ export const GitHubCard: React.FC<GitHubCardProps> = ({ stats }) => {
           </div>
           <div>
             <h3>GitHub Profile</h3>
-            <p>@{stats.username}</p>
+            <p>@{stats?.username}</p>
           </div>
         </div>
         <a
-          href={`https://github.com/${stats.username}`}
+          href={`https://github.com/${stats?.username}`}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.ghExternalLink}
@@ -44,10 +43,6 @@ export const GitHubCard: React.FC<GitHubCardProps> = ({ stats }) => {
       <ContributionGraph totalCommits={stats.totalCommits} contributions={stats.contributions} />
 
       <WeeklyActivity />
-
-      <TopLanguages languages={stats.topLanguages} />
-
-      <RecentRepositories repos={stats.recentRepos} />
     </div>
   );
 };

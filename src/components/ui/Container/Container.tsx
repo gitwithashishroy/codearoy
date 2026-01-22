@@ -3,21 +3,9 @@ import styles from './Container.module.scss';
 
 interface ContainerProps {
   children: React.ReactNode;
-  variant?: 'default' | 'fluid' | 'narrow';
   className?: string;
 }
 
-export default function Container({
-  children,
-  variant = 'default',
-  className = '',
-}: ContainerProps) {
-  const containerClass =
-    variant === 'fluid'
-      ? styles.containerFluid
-      : variant === 'narrow'
-        ? styles.containerNarrow
-        : styles.container;
-
-  return <div className={`${containerClass} ${className}`}>{children}</div>;
+export default function Container({ children, className = '' }: ContainerProps) {
+  return <div className={`${styles.container} ${className}`}>{children}</div>;
 }

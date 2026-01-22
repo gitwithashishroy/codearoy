@@ -2,14 +2,9 @@ import Container from '@/components/ui/Container/Container';
 import styles from './Skills.module.scss';
 import { PERSONAL_DETAILS } from '@/config/PERSONAL_DETAILS_CONFIG';
 import { Section } from '@/components/ui';
-import { GitHubCard } from '@/features/github/GithubCard';
-import { fetchGitHubStats } from '@/features/github/action';
-import { LeetCodeCard } from '@/features/github/LeetcodeCard';
 
 export default async function Skills() {
   const skills = PERSONAL_DETAILS.skills;
-
-  const githubStats = await fetchGitHubStats('gitwithashishroy');
 
   return (
     <Section
@@ -36,19 +31,6 @@ export default async function Skills() {
             </div>
           ))}
         </div>
-      </Container>
-      <Container className={styles.ctaContainer}>
-        <GitHubCard stats={githubStats} />
-        <LeetCodeCard
-          stats={{
-            username: 'gitwithashishroy',
-            solved: { total: 452, easy: 120, medium: 280, hard: 52 },
-            ranking: 'Top 2%',
-            contestRating: 1950,
-            badges: ['Guardian', 'Knight', '50 Days Badge'],
-            submissionCalendar: [],
-          }}
-        />
       </Container>
     </Section>
   );
