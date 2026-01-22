@@ -1,0 +1,404 @@
+@use '../../styles/breakpoints' as bp;
+
+.lcCard {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  height: 100%;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base);
+}
+
+.lcCard:hover {
+  border-color: var(--color-border-strong);
+  transform: translateY(-2px);
+}
+
+.lcHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.lcProfileInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.lcProfileInfo > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.lcIconBox {
+  padding: 0.5rem;
+  background: rgba(255, 161, 22, 0.15);
+  border-radius: 0.5rem;
+  color: #ffa116;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.lcProfileInfo h3 {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.lcProfileInfo p {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.lcBadgeList {
+  display: flex;
+  gap: 0.375rem;
+}
+
+.lcBadge {
+  font-size: 0.5625rem;
+  background: var(--color-subcard-bg);
+  color: var(--color-text-secondary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-border);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.lcVisualization {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.lcPieWrapper {
+  width: 8rem;
+  height: 8rem;
+  position: relative;
+}
+
+.lcPieCenter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.lcTotal {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
+.lcLabel {
+  font-size: 0.625rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-top: 0.125rem;
+}
+
+.lcLegend {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.lcLegendItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+}
+
+.lcLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.lcDot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+}
+
+.lcLegendValue {
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.lcMainStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.lcStatBox {
+  background: var(--color-subcard-bg);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+}
+
+.lcStatBox:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-subcard-bg-hover);
+  transform: translateY(-2px);
+}
+
+.lcStatBox label {
+  color: var(--color-text-muted);
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.lcStatValue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.lcValueHighlight {
+  color: #ffa116;
+}
+
+.lcChartSection {
+  margin-bottom: 2rem;
+}
+
+.lcChartSection:last-of-type {
+  margin-bottom: 0;
+}
+
+.lcChartSection h4 {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+}
+
+.lcCategoryList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.lcCategoryItem {
+  background: var(--color-subcard-bg);
+  padding: 0.875rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-base);
+}
+
+.lcCategoryItem:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-subcard-bg-hover);
+}
+
+.lcCategoryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.lcCategoryName {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.lcCategoryCount {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.lcProgressBar {
+  width: 100%;
+  height: 0.375rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.lcProgressFill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.lcStreakStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.lcStreakBox {
+  background: var(--color-subcard-bg);
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+.lcStreakBox:hover {
+  border-color: rgba(255, 161, 22, 0.3);
+  transform: translateY(-2px);
+}
+
+.lcStreakValue {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ffa116;
+  line-height: 1;
+}
+
+.lcStreakLabel {
+  font-size: 0.625rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.lcActivityWrapper {
+  background: var(--color-subcard-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.lcHeatmap {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.lcHeatSquare {
+  aspect-ratio: 1/1;
+  border-radius: 0.125rem;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+
+.lcHeatSquare:hover {
+  transform: scale(1.2);
+  outline: 0.125rem solid rgba(255, 161, 22, 0.5);
+  outline-offset: 0.0625rem;
+}
+
+.lcHeatmapFooter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.625rem;
+  color: var(--color-text-muted);
+}
+
+.lcHeatLegendItem {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 0.125rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+// Responsive styles
+@include bp.tablet {
+  .lcCard {
+    padding: 1.25rem;
+  }
+
+  .lcMainStats {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@include bp.mobile {
+  .lcCard {
+    padding: 1rem;
+  }
+
+  .lcHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .lcVisualization {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    justify-content: space-between;
+  }
+
+  .lcPieWrapper {
+    max-width: 12rem;
+  }
+
+  .lcLegend {
+    width: 100%;
+  }
+
+  .lcMainStats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+
+    .lcStatBox:last-child {
+      grid-column: 1/3;
+    }
+  }
+
+  .lcStreakStats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+}

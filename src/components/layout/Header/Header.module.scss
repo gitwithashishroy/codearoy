@@ -16,8 +16,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 6rem;
+  padding: 1rem 5rem;
   max-width: 100%;
+
+  @include bp.tablet {
+    padding: 1rem 2rem;
+  }
+
+  @include bp.mobile {
+    padding: 1rem;
+  }
 }
 
 .logo {
@@ -26,6 +34,11 @@
   color: var(--color-text-primary);
   text-decoration: none;
   transition: all var(--transition-base);
+  background: linear-gradient(90deg, var(--color-primary) 50%, var(--color-text-primary) 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
 
   span {
     color: var(--color-primary);

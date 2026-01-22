@@ -3,12 +3,12 @@ import styles from './Skills.module.scss';
 import { PERSONAL_DETAILS } from '@/config/PERSONAL_DETAILS_CONFIG';
 import { Section } from '@/components/ui';
 
-export default function Skills() {
+export default async function Skills() {
   const skills = PERSONAL_DETAILS.skills;
+
   return (
     <Section
       id="skills"
-      className={styles.skills}
       title="Tech Stack"
       subtitle="Technologies and tools I use to bring ideas to life"
     >

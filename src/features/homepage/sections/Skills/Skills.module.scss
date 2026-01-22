@@ -1,21 +1,15 @@
 @use '../../../../styles/breakpoints' as bp;
 
-.skills {
-  padding: 5rem 0;
-  background: linear-gradient(180deg, var(--color-bg-secondary) 0%, rgba(15, 23, 42, 0.02) 100%);
-}
-
 .skillsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
   gap: 1.25rem 1.5rem;
-  max-width: 80rem;
   margin: 0 auto;
   align-items: start;
 }
 
 .skillCard {
-  background: var(--color-bg-primary);
+  background: var(--color-bg-secondary);
   border: 1px solid rgba(255, 255, 255, 0.03);
   border-radius: var(--radius-xl);
   padding: 1.5rem 1.25rem;
@@ -76,7 +70,7 @@
   width: fit-content;
   padding: 0.45rem 0.85rem;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-primary);
   border-radius: 999px;
   color: var(--color-primary);
   font-size: 0.95rem;
@@ -98,6 +92,25 @@
   }
 }
 
+@include bp.tablet {
+  .skills {
+    padding: 5rem 0;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+    margin-bottom: 4rem;
+  }
+
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @include bp.mobile {
   .skills {
     padding: 4rem 0;
@@ -114,5 +127,22 @@
 
   .skillsGrid {
     grid-template-columns: 1fr;
+  }
+
+  .ctaContainer {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.ctaContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }

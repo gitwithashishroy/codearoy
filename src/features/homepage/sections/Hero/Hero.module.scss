@@ -1,27 +1,12 @@
 @use '../../../../styles/breakpoints' as bp;
 
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  padding: 4rem 4rem;
-  gap: 6rem;
-  background: var(--color-bg-primary);
-}
-
 .container {
-  position: relative;
-  z-index: var(--z-base);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: center;
 }
 
 .content {
-  max-width: calc(100%);
-
   .greeting {
     font-size: 1.125rem;
     margin-bottom: 1rem;
@@ -119,17 +104,22 @@
 .visual {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  width: 100%;
+
+  @include bp.mobile {
+    display: none;
+  }
+
+  @include bp.tablet {
+    display: none;
+  }
 }
 
 .illustration {
-  position: absolute;
-  width: 31.25rem;
-  height: 31.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  width: 90%;
 
   img {
     width: 100%;
@@ -140,8 +130,8 @@
 
 .codeSnippet {
   position: relative;
-  bottom: -15rem;
-  left: -10rem;
+  bottom: 10rem;
+  left: -25rem;
   background: rgba(15, 23, 42, 0.95);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-lg);
@@ -172,7 +162,8 @@
 @include bp.tablet {
   .container {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    align-items: center;
+    justify-content: center;
   }
 
   .title {
