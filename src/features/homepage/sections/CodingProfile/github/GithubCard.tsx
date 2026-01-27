@@ -31,11 +31,18 @@ export const GitHubCard: React.FC<GitHubCardProps> = async ({ stats }) => {
         </a>
       </div>
 
-      <StatsCard totalStars={stats.totalStars} totalCommits={stats.totalCommits} />
-
-      <ContributionGraph totalCommits={stats.totalCommits} contributions={stats.contributions} />
-
-      <WeeklyActivity />
+      <div className={styles.ghStatsContainer}>
+        <div className={styles.ghContributionGraphGrid}>
+          <ContributionGraph
+            totalCommits={stats.totalCommits}
+            contributions={stats.contributions}
+          />
+        </div>
+        <div className={styles.ghStatsGrid}>
+          <StatsCard totalStars={stats.totalStars} totalCommits={stats.totalCommits} />
+          <WeeklyActivity />
+        </div>
+      </div>
     </div>
   );
 };
