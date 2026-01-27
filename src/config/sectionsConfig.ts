@@ -8,7 +8,6 @@ import {
   Contact,
   CodingProfile,
 } from '@/features/homepage/sections';
-import { GitHubCard } from '@/features/github/GithubCard';
 
 export type SectionConfig = {
   id: string;
@@ -20,7 +19,6 @@ export type SectionConfig = {
 export const SECTIONS: SectionConfig[] = [
   { id: 'home', label: 'Home', component: Hero, enabled: true },
   { id: 'github', label: 'GitHub', component: CodingProfile, enabled: true },
-  { id: 'stats', label: 'Stats', component: Stats, enabled: true },
   { id: 'skills', label: 'Skills', component: Skills, enabled: true },
   { id: 'experience', label: 'Experience', component: Experience, enabled: true },
   { id: 'work', label: 'Work', component: Work, enabled: false },

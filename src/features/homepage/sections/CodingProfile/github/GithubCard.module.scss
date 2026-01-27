@@ -1,11 +1,14 @@
+@use '../../../../../styles/breakpoints' as bp;
+
 .ghCard {
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 0rem 1.5rem;
   box-shadow: var(--shadow-lg);
   transition: all var(--transition-base);
-  overflow-x: scroll;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .ghCard:hover {
@@ -15,9 +18,9 @@
 
 .ghHeader {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .ghProfileInfo {
@@ -80,21 +83,52 @@
   border-color: rgba(96, 165, 250, 0.3);
 }
 
-// Responsive styles
-@media (max-width: 1024px) {
-  .ghCard {
-    padding: 1.25rem;
+.ghStatsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  min-width: 0;
+
+  .ghContributionGraphGrid {
+    grid-column: 1/3;
+    min-width: 0;
+  }
+
+  .ghStatsGrid {
+    grid-column: 3/4;
+    min-width: 0;
   }
 }
 
-@media (max-width: 768px) {
+// Responsive styles
+@include bp.tablet {
+  .ghCard {
+    padding: 1.25rem;
+  }
+  .ghStatsContainer {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    .ghContributionGraphGrid {
+      grid-column: auto;
+    }
+
+    .ghStatsGrid {
+      grid-column: auto;
+    }
+  }
+}
+
+@include bp.mobile {
   .ghCard {
     padding: 1rem;
   }
 
+  .ghProfileInfo h3 {
+    font-size: 1rem;
+  }
+
   .ghHeader {
-    flex-direction: column;
-    align-items: flex-start;
     gap: 1rem;
   }
 }
