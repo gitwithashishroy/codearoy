@@ -130,6 +130,7 @@ export const PERSONAL_DETAILS: PersonalDetails = {
 
   navLinks: [
     { label: 'Home', href: '#home' },
+    { label: 'GitHub', href: '#github' },
     { label: 'Skills', href: '#skills' },
     { label: 'Experience', href: '#experience' },
     { label: 'Contact', href: '#contact' },

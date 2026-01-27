@@ -16,7 +16,7 @@ interface DayData {
 
 export const ContributionGraph: React.FC<ContributionGraphProps> = ({ contributions }) => {
   const currentYear = new Date().getFullYear();
-  const [selectedYear, setSelectedYear] = useState(currentYear);
+  const [selectedYear, setSelectedYear] = useState(2025);
 
   // Generate available years (current year and 4 previous years)
   const availableYears = useMemo(() => {
@@ -63,9 +63,12 @@ export const ContributionGraph: React.FC<ContributionGraphProps> = ({ contributi
     const contributionMap = new Map<string, number>();
     if (contributions) {
       contributions.forEach((c) => {
-        const date = new Date(c.date);
-        if (date.getFullYear() === selectedYear) {
-          contributionMap.set(c.date.split('T')[0], c.contributionCount);
+        // Parse date in UTC to avoid timezone issues
+        const dateStr = c.date.split('T')[0]; // Get YYYY-MM-DD
+        const [year, month, day] = dateStr.split('-').map(Number);
+        const date = new Date(Date.UTC(year, month - 1, day));
+        if (date.getUTCFullYear() === selectedYear) {
+          contributionMap.set(dateStr, c.contributionCount);
         }
       });
     }
@@ -80,9 +83,13 @@ export const ContributionGraph: React.FC<ContributionGraphProps> = ({ contributi
       const week: DayData[] = [];
 
       for (let day = 0; day < 7; day++) {
-        const dateStr = currentDate.toISOString().split('T')[0];
+        // Create date string in local timezone format YYYY-MM-DD
+        const year = currentDate.getFullYear();
+        const monthNum = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const dayNum = String(currentDate.getDate()).padStart(2, '0');
+        const dateStr = `${year}-${monthNum}-${dayNum}`;
         const isInYear = currentDate.getFullYear() === selectedYear;
-        const isFuture = currentDate > new Date(); // Check if date is in the future
+        const isFuture = currentDate > new Date();
 
         let count = 0;
         let level = 0;
@@ -99,10 +106,9 @@ export const ContributionGraph: React.FC<ContributionGraphProps> = ({ contributi
           } else {
             // Use seeded random for fallback
             level = getSeededLevel(currentDate);
-            count = level * 2; // Estimate count from level
+            count = level * 2;
           }
         }
-        // Future dates and out-of-year dates remain at level 0
 
         week.push({
           date: new Date(currentDate),
@@ -111,9 +117,9 @@ export const ContributionGraph: React.FC<ContributionGraphProps> = ({ contributi
         });
 
         // Track month changes for labels
-        const month = currentDate.getMonth();
-        if (month !== currentMonth && day === 0 && isInYear) {
-          currentMonth = month;
+        const currentMonthNum = currentDate.getMonth();
+        if (currentMonthNum !== currentMonth && day === 0 && isInYear) {
+          currentMonth = currentMonthNum;
           monthPos.push({
             month: currentDate.toLocaleDateString('en-US', { month: 'short' }),
             weekIndex: weeks.length,
@@ -129,12 +135,23 @@ export const ContributionGraph: React.FC<ContributionGraphProps> = ({ contributi
     return { weeksData: weeks, monthPositions: monthPos };
   }, [selectedYear, contributions, currentYear]);
 
-  // Calculate commits for selected year
+  // Calculate commits for selected year (only count actual contributions, not future dates)
   const yearCommits = useMemo(() => {
+    const today = new Date();
+    today.setHours(23, 59, 59, 999); // End of today
     return weeksData.reduce((sum, week) => {
-      return sum + week.reduce((weekSum, day) => weekSum + day.count, 0);
+      return (
+        sum +
+        week.reduce((weekSum, day) => {
+          // Only count if date is in selected year and not in the future
+          if (day.date.getFullYear() === selectedYear && day.date <= today) {
+            return weekSum + day.count;
+          }
+          return weekSum;
+        }, 0)
+      );
     }, 0);
-  }, [weeksData]);
+  }, [weeksData, selectedYear]);
 
   return (
     <div className={styles.ghChartSection}>

@@ -1,19 +1,12 @@
 @use '../../../../styles/breakpoints' as bp;
 
 .codingProfile {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
   width: 100%;
+  min-width: 0;
   margin-top: -12rem;
-}
-
-.githubCard {
-  grid-column: 1/4;
-}
-
-.leetCodeCard {
-  grid-column: 4/5;
 }
 
 @include bp.tablet {
