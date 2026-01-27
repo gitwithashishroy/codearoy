@@ -23,26 +23,6 @@ export const ContributionGraph: React.FC<ContributionGraphProps> = ({ contributi
     return Array.from({ length: 5 }, (_, i) => currentYear - i);
   }, [currentYear]);
 
-  // Helper function to generate seeded random level for a date
-  function getSeededLevel(date: Date): number {
-    const seededRandom = (seed: number) => {
-      const x = Math.sin(seed) * 10000;
-      return x - Math.floor(x);
-    };
-
-    const dayOfYear = Math.floor(
-      (date.getTime() - new Date(date.getFullYear(), 0, 0).getTime()) / 86400000
-    );
-    const factor =
-      Math.sin(dayOfYear / 15) * 2 + seededRandom(dayOfYear + 42 + date.getFullYear()) * 5;
-
-    if (factor < 1.5) return 0;
-    if (factor < 3) return 1;
-    if (factor < 4.5) return 2;
-    if (factor < 6) return 3;
-    return 4;
-  }
-
   // Generate weeks data with actual dates
   const { weeksData, monthPositions } = useMemo(() => {
     // Start from first Sunday of the year (or last Sunday of previous year)
@@ -103,11 +83,8 @@ export const ContributionGraph: React.FC<ContributionGraphProps> = ({ contributi
             else if (count <= 4) level = 2;
             else if (count <= 6) level = 3;
             else level = 4;
-          } else {
-            // Use seeded random for fallback
-            level = getSeededLevel(currentDate);
-            count = level * 2;
           }
+          // If date is not in contribution map, leave it as 0 (no contributions)
         }
 
         week.push({
