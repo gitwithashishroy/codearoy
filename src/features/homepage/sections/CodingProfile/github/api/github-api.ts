@@ -254,8 +254,8 @@ export async function fetchGitHubStats(username: string) {
 export async function fetchGitHubContributions(username: string): Promise<GitHubContribution[]> {
   try {
     if (!GITHUB_TOKEN) {
-      console.warn('GITHUB_TOKEN not found, using seeded data for contributions');
-      return generateSeededContributions();
+      console.warn('GITHUB_TOKEN not found, returning empty contributions');
+      return [];
     }
 
     const currentYear = new Date().getFullYear();
