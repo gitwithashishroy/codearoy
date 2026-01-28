@@ -254,8 +254,8 @@ export async function fetchGitHubStats(username: string) {
 export async function fetchGitHubContributions(username: string): Promise<GitHubContribution[]> {
   try {
     if (!GITHUB_TOKEN) {
-      console.warn('GITHUB_TOKEN not found, using seeded data for contributions');
-      return generateSeededContributions();
+      console.warn('GITHUB_TOKEN not found, returning empty contributions');
+      return [];
     }
 
     const currentYear = new Date().getFullYear();
@@ -322,35 +322,11 @@ export async function fetchGitHubContributions(username: string): Promise<GitHub
       allContributions.push(...yearContributions);
     }
 
-    return allContributions.length > 0 ? allContributions : generateSeededContributions();
+    return allContributions;
   } catch (error) {
     console.error('Error fetching GitHub contributions:', error);
-    return generateSeededContributions();
+    return [];
   }
-}
-
-// Fallback: Generate seeded contributions when GraphQL API is unavailable
-function generateSeededContributions(): GitHubContribution[] {
-  const contributions: GitHubContribution[] = [];
-  const today = new Date();
-
-  for (let i = 364; i >= 0; i--) {
-    const date = new Date(today);
-    date.setDate(date.getDate() - i);
-
-    // Use seeded random based on date
-    const seed = date.getTime() / 1000000;
-    const count = Math.floor(Math.sin(seed) * 3 + Math.cos(seed / 2) * 3 + 3);
-    const clampedCount = Math.max(0, Math.min(count, 10));
-
-    contributions.push({
-      date: date.toISOString().split('T')[0],
-      contributionCount: clampedCount,
-      color: getContributionColor(clampedCount),
-    });
-  }
-
-  return contributions;
 }
 
 function getContributionColor(count: number): string {
