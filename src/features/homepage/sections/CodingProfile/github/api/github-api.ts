@@ -232,8 +232,6 @@ export async function fetchGitHubStats(username: string) {
     // Calculate total commits from contributions
     const totalCommits = contributions.reduce((sum, day) => sum + day.contributionCount, 0);
 
-    console.log(userData);
-
     return {
       username: userData.login,
       totalRepos: userData.public_repos,
