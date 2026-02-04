@@ -24,7 +24,7 @@ export default function Hero() {
 
   const DownloadResume = () => {
     // Use direct download link from Google Drive
-    const fileId = '1ng4cXFhU4gY837-boXX3yIi-80YAzBn5';
+    const fileId = process.env.NEXT_PUBLIC_RESUME_FILE_ID;
     const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
 
     const link = document.createElement('a');
