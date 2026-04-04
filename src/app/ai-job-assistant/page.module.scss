@@ -1,5 +1,16 @@
 @use '../../styles/breakpoints' as bp;
 
+:global(header),
+:global(footer) {
+  display: none !important;
+}
+:global(body) {
+  background-color: #f7f8fa !important;
+}
+:global(main) {
+  padding-top: 0 !important;
+}
+
 .page {
   --color-primary: #8a6ef5;
   --color-primary-dark: #6e50e8;
