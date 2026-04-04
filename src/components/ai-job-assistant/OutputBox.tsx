@@ -5,8 +5,6 @@ import { SparklesIcon } from '@/components/icons/Icons';
 
 interface OutputBoxProps {
   output: string;
-  copied: boolean;
-  onCopy: () => Promise<void>;
 }
 
 export default function OutputBox({ output }: OutputBoxProps) {

@@ -43,15 +43,6 @@ export default function AIJobAssistantPage() {
 
   return (
     <div className={styles.page}>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        header, footer { display: none !important; }
-        body { background-color: #f7f8fa !important; }
-        main { padding-top: 0 !important; }
-      `,
-        }}
-      />
       <Section className={styles.section}>
         <Container className={styles.container}>
           <div className={styles.hero}>
@@ -145,7 +136,7 @@ export default function AIJobAssistantPage() {
                 )}
               </div>
               <div className={styles.blockContentFull}>
-                <OutputBox output={output} copied={copied} onCopy={handleCopy} />
+                <OutputBox output={output} />
               </div>
             </div>
           </div>
