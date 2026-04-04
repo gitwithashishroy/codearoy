@@ -1,0 +1,251 @@
+@use '../../styles/breakpoints' as bp;
+
+.page {
+  --color-primary: #8a6ef5;
+  --color-primary-dark: #6e50e8;
+  --color-primary-light: #ab95f8;
+  --color-bg-primary: #f7f8fa;
+  --color-bg-secondary: #ffffff;
+  --color-card-bg: #ffffff;
+  --color-text-primary: #212530;
+  --color-text-secondary: #747d95;
+  --color-text-muted: #9fa5b9;
+  --color-border: #e6e8ee;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--color-bg-primary);
+}
+
+.section {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.layout {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+  padding: 1.5rem;
+}
+
+.hero {
+  text-align: center;
+}
+
+.title {
+  color: #1b2031;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.title span {
+  background: linear-gradient(90deg, #8a48ef 0%, #4a82fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  margin-top: 1.25rem;
+  color: #747d95;
+  font-size: clamp(1.125rem, 2.2vw, 1.375rem);
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.formStack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: calc(30% - 1rem);
+}
+
+.outputContainer {
+  width: calc(70% - 1rem);
+  border-radius: 0.875rem;
+  border: 0.0625rem solid var(--color-border);
+  background: #ffffff;
+  box-shadow: 0 0.5rem 1rem rgba(30, 41, 59, 0.02);
+  overflow: hidden;
+}
+
+.block {
+  width: 100%;
+  border-radius: 0.875rem;
+  border: 0.0625rem solid var(--color-border);
+  background: #ffffff;
+  box-shadow: 0 0.5rem 1rem rgba(30, 41, 59, 0.02);
+  overflow: hidden;
+}
+
+.blockHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 0.0625rem solid var(--color-border);
+  justify-content: space-between;
+}
+
+.blockHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.blockHeader h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #212530;
+  margin: 0;
+}
+
+.blockContent {
+  padding: 1.5rem;
+}
+
+.blockContentNoPad {
+  padding: 0;
+}
+
+.blockContentFull {
+  padding: 0;
+}
+
+.blockHeaderPurple {
+  @extend .blockHeader;
+  color: #6333e2;
+}
+
+.blockHeaderPurple h2 {
+  color: #212530;
+}
+
+.blockHeaderPurple .blockIcon {
+  color: #8c5ff8;
+}
+
+.blockIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #555d72;
+}
+
+.iconCopyButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9fa5b9;
+  transition: all 200ms ease;
+
+  &:hover {
+    background: #f2f3f7;
+    color: #4a567b;
+  }
+}
+
+.copyIcon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.optionalText {
+  font-size: 0.875rem;
+  color: #939aaa;
+  font-weight: 400;
+}
+
+.selectGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.blockInline {
+  display: flex;
+  align-items: center;
+  border-radius: 0.875rem;
+  border: 0.0625rem solid var(--color-border);
+  background: #ffffff;
+  padding: 0;
+  box-shadow: 0 0.5rem 1rem rgba(30, 41, 59, 0.02);
+  position: relative;
+}
+
+.inlineLabel {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #747d95;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.error {
+  color: #d0465a;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.footerText {
+  text-align: center;
+  margin-top: 3rem;
+  color: #747d95;
+  font-size: 0.875rem;
+}
+
+@include bp.mobile {
+  .section {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .layout {
+    flex-direction: column;
+    padding: 0rem;
+  }
+
+  .formStack {
+    width: 100%;
+  }
+
+  .outputContainer {
+    width: 100%;
+  }
+
+  .hero {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+  }
+
+  .title {
+    font-size: 2.25rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .selectGrid {
+    grid-template-columns: 1fr;
+  }
+}
